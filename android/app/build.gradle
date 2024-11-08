@@ -38,7 +38,9 @@ android {
         }
     }
 }
-
+dependencies {
+//    implementation 'io.flutter:flutter_embedding_release:2.0.0'
+}
 flutter {
     source = "../.."
 }
