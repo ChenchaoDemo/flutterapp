@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/ui/NavPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
-  init();//初始化一些信息
+void main() async  {
+  await Hive.initFlutter();
+  // 打开一个 Box 存储数据，Box 是 Hive 中的一个存储单元
+  await Hive.openBox('myBox');
   runApp(const MyApp());
 }
 
-void init() {
-  // 初始化
-}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -26,11 +28,23 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class LoginPage extends StatefulWidget{
+  const LoginPage({super.key});
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
 //登录页
-class LoginPage extends StatelessWidget {
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  late Box box;
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box('myBox');
+    usernameController.text = box.get('username', defaultValue: '');
+    passwordController.text = box.get('password', defaultValue: '');
+  }
   void login(BuildContext context, String username, String password) {
     if (username.isEmpty || password.isEmpty) {
       Fluttertoast.showToast(
@@ -48,6 +62,8 @@ class LoginPage extends StatelessWidget {
           timeInSecForIosWeb: 1,
           fontSize: 16.0
       );
+      box.put('username', username);
+      box.put('password', password);
       Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => NavPage()), // 跳转到底部导航页面
       );
@@ -128,4 +144,11 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Future<void> dispose() async {
+    // 释放资源
+    await Hive.close();
+  }
+
 }
