@@ -36,8 +36,9 @@ flutter_native_splash:
   ios: true
   fullscreen: true
 
-  flutter:
-    assets:
-      - assets/images/splash_logo.png
+flutter:
+  assets:
+    - assets/images/
+
 
 

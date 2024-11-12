@@ -28,3 +28,8 @@ java  17
 distributionUrl=https\://services.gradle.org/distributions/gradle-8.0.1-all.zip
 
 
+
+## 对于图片资源找不到 执行代码
+flutter clean
+flutter pub get
+flutter run
