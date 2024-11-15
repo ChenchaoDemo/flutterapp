@@ -18,9 +18,23 @@ dependencies:
   hive_flutter: ^1.1.0
   path_provider: ^2.0.9
 
-#  启动页
+  #  启动页
   flutter_native_splash: ^2.2.12
-
+  #  网络请求
+  dio: ^5.7.0
+  #  日志打印
+  pretty_dio_logger: ^1.4.0
+  #loading显示
+  flutter_easyloading: ^3.0.5
+  #GetX使用
+  get: ^4.6.6
+  #屏幕适配
+  flutter_screenutil: ^5.9.3
+#  加密
+  encrypt: ^5.0.1
+  pointycastle: ^3.0.0
+#  状态管理
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:
