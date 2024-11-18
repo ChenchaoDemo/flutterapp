@@ -22,6 +22,9 @@ dependencies:
   flutter_native_splash: ^2.2.12
   #  网络请求
   dio: ^5.7.0
+# 日志打印
+  logger: ^2.5.0
+
   #  日志打印
   pretty_dio_logger: ^1.4.0
   #loading显示
@@ -31,9 +34,10 @@ dependencies:
   #屏幕适配
   flutter_screenutil: ^5.9.3
 #  加密
-  encrypt: ^5.0.1
+  encrypt: ^5.0.0
   pointycastle: ^3.0.0
-#  状态管理
+
+  #  状态管理
   provider: ^6.0.1
 
 dev_dependencies:
@@ -53,6 +57,7 @@ flutter_native_splash:
 flutter:
   assets:
     - assets/images/
+    - key/
 
 
 
