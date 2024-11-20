@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutterapp/ui/NavPage.dart';
+import 'package:flutterapp/model/user_login_entitiy.dart';
+import 'package:flutterapp/ui/navi/NavPage.dart';
 import 'package:flutterapp/utils/HiveUtils.dart';
 import 'package:flutterapp/utils/RSAEncryptionUtils.dart';
+import 'package:flutterapp/utils/ToastUtils.dart';
 import 'package:flutterapp/viewmodel/LoginViewModel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
@@ -11,6 +15,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import 'net/ApiResponse.dart';
 import 'net/HttpService.dart';
 
 void main() async  {
@@ -57,13 +62,7 @@ class _LoginPageState extends State<LoginPage> {
   }
   Future<void> login(BuildContext context,String baseCode, String username, String password) async {
     if (baseCode.isEmpty || username.isEmpty || password.isEmpty) {
-      Fluttertoast.showToast(
-          msg: "基地代码,账号密码不能为空",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          fontSize: 16.0
-      );
+      ToastUtils.showBottom('基地代码,账号密码不能为空');
     }else{
       print("加密$password" );
       String encodePassword ="";
@@ -77,23 +76,21 @@ class _LoginPageState extends State<LoginPage> {
             'username': username,
             'password': encodePassword
           }).then((value) {
-        print('Response Data: $value');
+            print('Response Data: $value');
+            UserLoginEntitiy user= UserLoginEntitiy.fromJson(jsonDecode(value));
+            // UserLoginEntitiy userLoginEntitiy = UserLoginEntitiy().fromJson(value);
+            if(user.code == 200) {
+              HiveUtils.putData('basecode', baseCode);
+              HiveUtils.putData('username', username);
+              HiveUtils.putData('password', password);
+              ToastUtils.showBottom('登录成功');
+              Get.off(NavPage());
+            }else{
+              ToastUtils.showBottom(user.msg ?? '登录失败');
+            }
       });
-
-      HiveUtils.putData('basecode', baseCode);
-      HiveUtils.putData('username', username);
-      HiveUtils.putData('password', 'yicun1234');
-      // Get.to(NavPage());
     }
       // else {
-    //   Fluttertoast.showToast(
-    //       msg: "账号密码错误",
-    //       toastLength: Toast.LENGTH_SHORT,
-    //       gravity: ToastGravity.BOTTOM,
-    //       timeInSecForIosWeb: 1,
-    //       fontSize: 16.0
-    //   );
-    // }
   }
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutterapp/generated/assets.dart';
 import 'package:flutterapp/utils/HiveUtils.dart';
 
-import 'CustomSwitch.dart';
+import '../../widget/CustomSwitch.dart';
 
 class UserPage extends StatefulWidget {
   @override

@@ -20,6 +20,7 @@ class SalesFlowNodeType {
       "PRODUCT_SELECT", "商品选择", "assets/images/home_production_finished_goods_statistics.png", 4);
   static const SalesFlowNodeType TRADE_REPORT = SalesFlowNodeType(
       "TRADE_REPORT", "交易报告", "assets/images/home_icon_trade_report.png", 5);
+
   static const SalesFlowNodeType HISTORY_OUT_WAREHOUSE_RECEIPT =
   SalesFlowNodeType("HISTORY_OUT_WAREHOUSE_RECEIPT", "历史出库单",
       "assets/images/home_icon_history_out_warehouse_receipt.png", 6);

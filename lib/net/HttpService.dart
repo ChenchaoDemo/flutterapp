@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
@@ -23,12 +25,15 @@ class HttpService {
       baseUrl: baseUrl, // 替换为你的基地址
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
+      responseType: ResponseType.plain,
     ));
     // 添加拦截器
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         // 在请求拦截器中设置 Host 请求头  下面这个请求头在当前环境中必须传递,否则服务无响应
         options.headers['Host'] = 'grain.ahyicun.cn';  // 设置 Host 请求头
+        options.headers['appname'] = 'outflow';
+        options.headers['appversion'] = '1.2.0';
         _logger.i('Request [${options.method}] -> ${options.baseUrl}${options.path}\nHeaders: ${options.headers}\nData: ${options.data}');
         // 使用缓存的请求头
         if (_cachedHeaders.isNotEmpty) {
@@ -37,6 +42,10 @@ class HttpService {
         return handler.next(options);
       },
       onResponse: (response, handler) {
+        //绑定token
+        if(response.realUri.toString().contains('user/login')){
+          setCachedHeaders({'Authorization': '${response.headers.value('authorization')}'});
+        }
         _logger.i('Response [${response.statusCode}] -> ${response.data}');
         return handler.next(response);
       },
@@ -46,6 +55,7 @@ class HttpService {
       },
     ));
   }
+
 
   /// 设置缓存的请求头
   void setCachedHeaders(Map<String, String> headers) {
@@ -72,16 +82,10 @@ class HttpService {
   /// 发送 POST 请求并传递 queryParameters
   Future<dynamic> postWithQueryParams(String path, {required Map<String, dynamic> queryParams}) async {
     try {
-      // var options = Options(
-      //   headers: {
-      //     'Host': 'grain.ahyicun.cn',  // 设置请求头中的 Host 信息
-      //   },
-      // );
       // 发起 POST 请求并传递查询参数
       Response response = await _dio.post(
         path, // 请求路径
         queryParameters: queryParams, // 查询参数
-        // options: options,  // 使用设置的请求头
       );
       // 返回响应数据
       return response.data;
