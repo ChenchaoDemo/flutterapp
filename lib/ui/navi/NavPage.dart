@@ -171,17 +171,31 @@ class _NavPageState extends State<NavPage> {
         bottomNavigationBar: BottomNavigationBar(
           onTap: onTabTapped,
           currentIndex: _currentIndex,
-          items: const <BottomNavigationBarItem>[
+          selectedItemColor: Colors.blueAccent,
+          unselectedItemColor: Colors.grey,
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Image.asset(
+                Assets.imagesNaviIconUser,
+                width: 20,
+                height: 20,
+              ),
               label: '流程',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.business),
+              icon: Image.asset(
+                'assets/images/navi_icon_center.png',
+                width: 24,
+                height: 24,
+              ),
               label: '常用',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+              icon: Image.asset(
+                'assets/images/navi_icon_user.png',
+                width: 24,
+                height: 24,
+              ),
               label: '设置',
             ),
           ],

@@ -66,28 +66,28 @@ class CenterPage extends StatelessWidget {
   void showSelect(SalesFlowNodeType item){
     switch(item.key){
       case "HISTORY_OUT_WAREHOUSE_RECEIPT":
-        Get.to(HistoryOutWarehouseReceiptPage(),arguments: item.value);
+        Get.to(HistoryOutWarehouseReceiptPage(),arguments:{'title': item.value,});
         break;
       case "HISTORY_TRADE_RECEIPT":
-        Get.to(HistoryTradeReceiptPage(),arguments: item.value);
+        Get.to(HistoryTradeReceiptPage(),arguments:{'title': item.value,});
         break;
       case "LOGOUT_FLOW_CARD":
-        Get.to(LogoutFlowCardPage(),arguments: item.value);
+        Get.to(LogoutFlowCardPage(),arguments:{'title': item.value,});
         break;
       case "INVENTORY_QUERY":
-        Get.to(InventoryQueryPage(),arguments: item.value);
+        Get.to(InventoryQueryPage(),arguments:{'title': item.value,});
         break;
       case "VIEW_PLAN":
-        Get.to(ViewPlanPage(),arguments: item.value);
+        Get.to(ViewPlanPage(),arguments:{'title': item.value,});
         break;
       case "DATA_STATISTICS":
-        Get.to(DataStatisticsPage(),arguments: item.value);
+        Get.to(DataStatisticsPage(),arguments:{'title': item.value,});
         break;
       case "QUICK_REGISTRATION":
-        Get.to(QuickRegistrationPage(),arguments: item.value);
+        Get.to(QuickRegistrationPage(),arguments:{'title': item.value,});
         break;
       case "HELP_CENTER":
-        Get.to(HelpCenterPage(),arguments: item.value);
+        Get.to(HelpCenterPage(),arguments:{'title': item.value,});
         break;
     }
   }

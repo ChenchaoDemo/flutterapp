@@ -6,7 +6,9 @@
 import 'package:flutter/material.dart' show debugPrint;
 import 'package:flutterapp/model/base_set_entitiy.dart';
 import 'package:flutterapp/model/out_storage_weight_entitiy.dart';
+import 'package:flutterapp/model/sell_out_entitiy.dart';
 import 'package:flutterapp/model/user_login_entitiy.dart';
+import 'package:flutterapp/model/user_search_entitiy.dart';
 
 JsonConvert jsonConvert = JsonConvert();
 
@@ -161,6 +163,18 @@ class JsonConvert {
       return data.map<OutStorageWeightData>((Map<String, dynamic> e) =>
           OutStorageWeightData.fromJson(e)).toList() as M;
     }
+    if (<SellOutEntitiy>[] is M) {
+      return data.map<SellOutEntitiy>((Map<String, dynamic> e) => SellOutEntitiy.fromJson(e))
+          .toList() as M;
+    }
+    if (<SellOutData>[] is M) {
+      return data.map<SellOutData>((Map<String, dynamic> e) => SellOutData.fromJson(e))
+          .toList() as M;
+    }
+    if (<SellOutDataData>[] is M) {
+      return data.map<SellOutDataData>((Map<String, dynamic> e) => SellOutDataData.fromJson(e))
+          .toList() as M;
+    }
     if (<UserLoginEntitiy>[] is M) {
       return data.map<UserLoginEntitiy>((Map<String, dynamic> e) => UserLoginEntitiy.fromJson(e))
           .toList() as M;
@@ -168,6 +182,18 @@ class JsonConvert {
     if (<UserLoginData>[] is M) {
       return data.map<UserLoginData>((Map<String, dynamic> e) => UserLoginData.fromJson(e))
           .toList() as M;
+    }
+    if (<UserSearchEntitiy>[] is M) {
+      return data.map<UserSearchEntitiy>((Map<String, dynamic> e) => UserSearchEntitiy.fromJson(e))
+          .toList() as M;
+    }
+    if (<UserSearchData>[] is M) {
+      return data.map<UserSearchData>((Map<String, dynamic> e) => UserSearchData.fromJson(e))
+          .toList() as M;
+    }
+    if (<UserSearchDataData>[] is M) {
+      return data.map<UserSearchDataData>((Map<String, dynamic> e) =>
+          UserSearchDataData.fromJson(e)).toList() as M;
     }
 
     debugPrint("$M not found");
@@ -194,8 +220,14 @@ class JsonConvertClassCollection {
     (BaseSetDataBaseSettings).toString(): BaseSetDataBaseSettings.fromJson,
     (OutStorageWeightEntitiy).toString(): OutStorageWeightEntitiy.fromJson,
     (OutStorageWeightData).toString(): OutStorageWeightData.fromJson,
+    (SellOutEntitiy).toString(): SellOutEntitiy.fromJson,
+    (SellOutData).toString(): SellOutData.fromJson,
+    (SellOutDataData).toString(): SellOutDataData.fromJson,
     (UserLoginEntitiy).toString(): UserLoginEntitiy.fromJson,
     (UserLoginData).toString(): UserLoginData.fromJson,
+    (UserSearchEntitiy).toString(): UserSearchEntitiy.fromJson,
+    (UserSearchData).toString(): UserSearchData.fromJson,
+    (UserSearchDataData).toString(): UserSearchDataData.fromJson,
   };
 
   bool containsKey(String type) {

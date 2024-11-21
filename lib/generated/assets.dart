@@ -132,6 +132,11 @@ class Assets {
   static const String imagesHomeSemiFinishedProductsStatistics = 'assets/images/home_semi_finished_products_statistics.png';
   static const String imagesHomeUserAvatar = 'assets/images/home_user_avatar.png';
   static const String imagesIconCircleReduce = 'assets/images/icon_circle_reduce.png';
+  static const String imagesNaviIconCenter = 'assets/images/navi_icon_center.png';
+  static const String imagesNaviIconHome = 'assets/images/navi_icon_home.png';
+  static const String imagesNaviIconUser = 'assets/images/navi_icon_user.png';
   static const String imagesSplashLogo = 'assets/images/splash_logo.png';
+  static const String keyPrivate = 'key/private.pem';
+  static const String keyPublic = 'key/public.pem';
 
 }

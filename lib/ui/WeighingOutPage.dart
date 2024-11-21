@@ -20,7 +20,7 @@ class WeighingOutPage extends StatefulWidget {
 class _WeighingOutPageState extends State<WeighingOutPage> {
   @override
   Widget build(BuildContext context) {
-    final String message = Get.arguments ?? '';
+    final String message = Get.arguments['title'];
     return Scaffold(
       appBar: CustomAppBar( title: message, onProfileTap: () {
         ToastUtils.showBottom("onProfileTap");

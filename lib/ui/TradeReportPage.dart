@@ -20,7 +20,7 @@ class TradeReportPage extends StatefulWidget {
 class _TradeReportPageState extends State<TradeReportPage> {
   @override
   Widget build(BuildContext context) {
-    final String message = Get.arguments ?? '';
+    final String message = Get.arguments['title'];
     return Scaffold(
       appBar: CustomAppBar( title: message, onProfileTap: () {
         ToastUtils.showBottom("onProfileTap");

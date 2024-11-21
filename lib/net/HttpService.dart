@@ -34,11 +34,20 @@ class HttpService {
         options.headers['Host'] = 'grain.ahyicun.cn';  // 设置 Host 请求头
         options.headers['appname'] = 'outflow';
         options.headers['appversion'] = '1.2.0';
-        _logger.i('Request [${options.method}] -> ${options.baseUrl}${options.path}\nHeaders: ${options.headers}\nData: ${options.data}');
         // 使用缓存的请求头
         if (_cachedHeaders.isNotEmpty) {
           options.headers.addAll(_cachedHeaders);
         }
+        // 打印请求参数
+        _logger.i('''
+        *** Request ***
+        Method: ${options.method}
+        URL: ${options.baseUrl}${options.path}
+        Headers: ${options.headers}
+        Query Parameters: ${options.queryParameters}
+        Body: ${options.data}
+        ****************
+        ''');
         return handler.next(options);
       },
       onResponse: (response, handler) {

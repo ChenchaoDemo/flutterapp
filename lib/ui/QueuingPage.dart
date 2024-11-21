@@ -19,7 +19,7 @@ class QueuingPage extends StatefulWidget {
 class _QueuingPageState extends State<QueuingPage> {
   @override
   Widget build(BuildContext context) {
-    final String message = Get.arguments ?? '';
+    final String message = Get.arguments['title'];
     return Scaffold(
       appBar: CustomAppBar( title: message, onProfileTap: () {
         ToastUtils.showBottom("onProfileTap");

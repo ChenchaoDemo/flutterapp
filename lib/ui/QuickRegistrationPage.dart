@@ -20,7 +20,7 @@ class QuickRegistrationPage extends StatefulWidget {
 class _QuickRegistrationPageState extends State<QuickRegistrationPage> {
   @override
   Widget build(BuildContext context) {
-    final String message = Get.arguments ?? '';
+    final String message = Get.arguments['title'];
     return Scaffold(
       appBar: CustomAppBar( title: message, onProfileTap: () {
         ToastUtils.showBottom("onProfileTap");

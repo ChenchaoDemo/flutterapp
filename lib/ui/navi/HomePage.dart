@@ -64,19 +64,19 @@ class HomePage extends StatelessWidget {
   void showSelect(SalesFlowNodeType item){
     switch(item.key){
       case "QUEUING":
-        Get.to(QueuingPage(),arguments: item.value);
+        Get.to(QueuingPage(),arguments:{'title': item.value,});
         break;
       case "WEIGHING_IN":
-        Get.to(WeighingInPage(),arguments: item.value);
+        Get.to(WeighingInPage(),arguments:{'title': item.value,});
         break;
       case "WEIGHING_OUT":
-        Get.to(WeighingOutPage(),arguments: item.value);
+        Get.to(WeighingOutPage(),arguments:{'title': item.value,});
         break;
       case "PRODUCT_SELECT":
-        Get.to(ProdectSelectPage(),arguments: item.value);
+        Get.to(ProdectSelectPage(),arguments:{'title': item.value,});
         break;
       case "TRADE_REPORT":
-        Get.to(TradeReportPage(),arguments: item.value);
+        Get.to(TradeReportPage(),arguments:{'title': item.value,});
         break;
     }
   }
