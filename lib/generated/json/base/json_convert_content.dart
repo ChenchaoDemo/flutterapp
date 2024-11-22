@@ -7,6 +7,7 @@ import 'package:flutter/material.dart' show debugPrint;
 import 'package:flutterapp/model/base_set_entitiy.dart';
 import 'package:flutterapp/model/out_storage_weight_entitiy.dart';
 import 'package:flutterapp/model/sell_out_entitiy.dart';
+import 'package:flutterapp/model/sell_trade_detail_entitiy.dart';
 import 'package:flutterapp/model/user_login_entitiy.dart';
 import 'package:flutterapp/model/user_search_entitiy.dart';
 
@@ -175,6 +176,45 @@ class JsonConvert {
       return data.map<SellOutDataData>((Map<String, dynamic> e) => SellOutDataData.fromJson(e))
           .toList() as M;
     }
+    if (<SellTradeDetailEntitiy>[] is M) {
+      return data.map<SellTradeDetailEntitiy>((Map<String, dynamic> e) =>
+          SellTradeDetailEntitiy.fromJson(e)).toList() as M;
+    }
+    if (<SellTradeDetailData>[] is M) {
+      return data.map<SellTradeDetailData>((Map<String, dynamic> e) =>
+          SellTradeDetailData.fromJson(e)).toList() as M;
+    }
+    if (<SellTradeDetailDataCustomer>[] is M) {
+      return data.map<SellTradeDetailDataCustomer>((Map<String, dynamic> e) =>
+          SellTradeDetailDataCustomer.fromJson(e)).toList() as M;
+    }
+    if (<SellTradeDetailDataDriver>[] is M) {
+      return data.map<SellTradeDetailDataDriver>((Map<String, dynamic> e) =>
+          SellTradeDetailDataDriver.fromJson(e)).toList() as M;
+    }
+    if (<SellTradeDetailDataBaseStation>[] is M) {
+      return data.map<SellTradeDetailDataBaseStation>((Map<String, dynamic> e) =>
+          SellTradeDetailDataBaseStation.fromJson(e)).toList() as M;
+    }
+    if (<SellTradeDetailDataGrainSalesOutWarehouseDto>[] is M) {
+      return data.map<SellTradeDetailDataGrainSalesOutWarehouseDto>((Map<String, dynamic> e) =>
+          SellTradeDetailDataGrainSalesOutWarehouseDto.fromJson(e)).toList() as M;
+    }
+    if (<SellTradeDetailDataGrainSalesOutWarehouseDtoGrainSalesOutWarehouseDetailDtoList>[] is M) {
+      return data.map<
+          SellTradeDetailDataGrainSalesOutWarehouseDtoGrainSalesOutWarehouseDetailDtoList>((
+          Map<String, dynamic> e) =>
+          SellTradeDetailDataGrainSalesOutWarehouseDtoGrainSalesOutWarehouseDetailDtoList.fromJson(
+              e)).toList() as M;
+    }
+    if (<SellTradeDetailDataInWeightRecordDto>[] is M) {
+      return data.map<SellTradeDetailDataInWeightRecordDto>((Map<String, dynamic> e) =>
+          SellTradeDetailDataInWeightRecordDto.fromJson(e)).toList() as M;
+    }
+    if (<SellTradeDetailDataOutWeightRecordDto>[] is M) {
+      return data.map<SellTradeDetailDataOutWeightRecordDto>((Map<String, dynamic> e) =>
+          SellTradeDetailDataOutWeightRecordDto.fromJson(e)).toList() as M;
+    }
     if (<UserLoginEntitiy>[] is M) {
       return data.map<UserLoginEntitiy>((Map<String, dynamic> e) => UserLoginEntitiy.fromJson(e))
           .toList() as M;
@@ -223,6 +263,20 @@ class JsonConvertClassCollection {
     (SellOutEntitiy).toString(): SellOutEntitiy.fromJson,
     (SellOutData).toString(): SellOutData.fromJson,
     (SellOutDataData).toString(): SellOutDataData.fromJson,
+    (SellTradeDetailEntitiy).toString(): SellTradeDetailEntitiy.fromJson,
+    (SellTradeDetailData).toString(): SellTradeDetailData.fromJson,
+    (SellTradeDetailDataCustomer).toString(): SellTradeDetailDataCustomer.fromJson,
+    (SellTradeDetailDataDriver).toString(): SellTradeDetailDataDriver.fromJson,
+    (SellTradeDetailDataBaseStation).toString(): SellTradeDetailDataBaseStation.fromJson,
+    (SellTradeDetailDataGrainSalesOutWarehouseDto)
+        .toString(): SellTradeDetailDataGrainSalesOutWarehouseDto.fromJson,
+    (SellTradeDetailDataGrainSalesOutWarehouseDtoGrainSalesOutWarehouseDetailDtoList)
+        .toString(): SellTradeDetailDataGrainSalesOutWarehouseDtoGrainSalesOutWarehouseDetailDtoList
+        .fromJson,
+    (SellTradeDetailDataInWeightRecordDto).toString(): SellTradeDetailDataInWeightRecordDto
+        .fromJson,
+    (SellTradeDetailDataOutWeightRecordDto).toString(): SellTradeDetailDataOutWeightRecordDto
+        .fromJson,
     (UserLoginEntitiy).toString(): UserLoginEntitiy.fromJson,
     (UserLoginData).toString(): UserLoginData.fromJson,
     (UserSearchEntitiy).toString(): UserSearchEntitiy.fromJson,

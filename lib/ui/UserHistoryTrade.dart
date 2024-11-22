@@ -15,6 +15,7 @@ import '../net/HttpService.dart';
 import '../utils/ComputeUtils.dart';
 import '../utils/ToastUtils.dart';
 import '../widget/CustomAppBar.dart';
+import 'TradeHistoryDetailPage.dart';
 
 class UserHistoryTrade extends StatefulWidget {
   const UserHistoryTrade({Key? key}) : super(key: key);
@@ -60,8 +61,8 @@ class _UserHistoryTradeState extends State<UserHistoryTrade> {
   Widget build(BuildContext context) {
     final Map<String, dynamic> args =Get.arguments;
     final String message = args['title'] ?? '';
-    UserSearchDataData item= args['item'] ?? UserSearchDataData();
-    _searchValue=item.phone ?? '';
+    UserSearchDataData userSearchDataData= args['item'] ?? UserSearchDataData();
+    _searchValue=userSearchDataData.phone ?? '';
     return Scaffold(
       appBar: CustomAppBar( title: message, onProfileTap: () {
         ToastUtils.showBottom("onProfileTap");
@@ -82,12 +83,12 @@ class _UserHistoryTradeState extends State<UserHistoryTrade> {
               ),
               Expanded(
                 flex: 2,
-                child: Text(item.address ?? '',textAlign: TextAlign.center),
+                child: Text(userSearchDataData.address ?? '',textAlign: TextAlign.center),
               ),
               SizedBox(width: 10),
               Expanded(
                 flex: 1,
-                child: Text(ComputeUtils.formatPhoneNumber(item.phone ?? '',),textAlign: TextAlign.center),
+                child: Text(ComputeUtils.formatPhoneNumber(userSearchDataData.phone ?? '',),textAlign: TextAlign.center),
               ),
             ],
           ),
@@ -151,7 +152,14 @@ class _UserHistoryTradeState extends State<UserHistoryTrade> {
                   return _ListItem(
                     item: item,
                     index: index,
-                    onTap: () => ToastUtils.showBottom('查看详情'),
+                    onTap: () {
+                      Get.to(
+                        TradeHistoryDetailPage(),
+                        arguments: {
+                          'item': item,     // 示例对象
+                        },
+                      );
+                    },
                   );
                 },
               ),
@@ -161,8 +169,6 @@ class _UserHistoryTradeState extends State<UserHistoryTrade> {
       ),
     );
   }
-
-
 
   Future<void> _fetchData() async {
     if (_isLoading) return; // 防止重复请求

@@ -31,7 +31,7 @@ class _HistoryTradeReceiptPageState extends State<HistoryTradeReceiptPage> {
 
   @override
   Widget build(BuildContext context) {
-    final String message = Get.arguments['title'];
+    final String message = Get.arguments['title'] ?? '';
     return Scaffold(
       appBar: CustomAppBar( title: message, onProfileTap: () {
         ToastUtils.showBottom("onProfileTap");

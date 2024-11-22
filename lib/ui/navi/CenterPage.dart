@@ -18,6 +18,7 @@ import '../../utils/ToastUtils.dart';
 class CenterPage extends StatelessWidget {
 
   final List<SalesFlowNodeType> items = SalesFlowNodeType.getCommonNodes();
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class CenterPage extends StatelessWidget {
         Get.to(ViewPlanPage(),arguments:{'title': item.value,});
         break;
       case "DATA_STATISTICS":
-        Get.to(DataStatisticsPage(),arguments:{'title': item.value,});
+        _showCustomDialog(item.value);
         break;
       case "QUICK_REGISTRATION":
         Get.to(QuickRegistrationPage(),arguments:{'title': item.value,});
@@ -90,5 +91,93 @@ class CenterPage extends StatelessWidget {
         Get.to(HelpCenterPage(),arguments:{'title': item.value,});
         break;
     }
+  }
+
+  //自定义弹窗
+  // 显示自定义弹窗
+  void _showCustomDialog(String value) {
+    Get.dialog(
+      // 弹窗内容
+      Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ImageIcon(
+                AssetImage('assets/images/common_icon_shield.png'),
+                size: 50,
+                color: Colors.blue,
+              ),
+              SizedBox(height: 20),
+              Text(
+                '请输入授权码后访问此功能',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.only(left: 10),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextField(
+                  keyboardType: TextInputType.number, // 数字键盘
+                  controller: controller,
+                  decoration: InputDecoration(
+                    hintText: '请输入授权码',
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.back();  // 关闭弹窗
+                      },
+                      child: Text(
+                          '取消',
+                          style: TextStyle(
+                              color: Colors.blueAccent
+                          )
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if(controller.text.isEmpty){
+                          ToastUtils.showBottom('请输入授权码');
+                          return;
+                        }else if(controller.text == '12345'){
+                          Get.back();
+                          Get.to(DataStatisticsPage(),arguments:{'title': value,});
+                        }else{
+                          ToastUtils.showBottom('授权码错误');
+                        }
+                      },
+                      child: Text(
+                          '确定',
+                          style: TextStyle(
+                            color: Colors.blueAccent
+                          )
+                      ),
+                    ),
+                  ),
+                ]
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
