@@ -16,7 +16,7 @@ dependencies:
   #  加密本地存储数据
   hive: ^2.0.4
   hive_flutter: ^1.1.0
-  path_provider: ^2.0.9
+  path_provider: ^2.0.11
 
   #  启动页
   flutter_native_splash: ^2.2.12
@@ -42,6 +42,9 @@ dependencies:
   #  状态管理
   provider: ^6.0.1
 
+#  定位功能
+#  flutter_z_location: ^0.0.9
+
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +64,12 @@ flutter:
   assets:
     - assets/images/
     - key/
+    - assets/province/
+    - assets/ip/
+    - assets/city/
+    - assets/district/
+    - assets/areaList/
+
 
 
 

@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../obj/FlowNodeType.dart';
+import '../OtherTypePage.dart';
 import '../QueuingPage.dart';
 import '../../utils/ToastUtils.dart';
 
@@ -78,6 +79,10 @@ class HomePage extends StatelessWidget {
       case "TRADE_REPORT":
         Get.to(TradeReportPage(),arguments:{'title': item.value,});
         break;
+      case "OTHER_TYPE":
+        Get.to(OtherTypePage(),arguments:{'title': item.value,});
+        break;
+
     }
   }
 }

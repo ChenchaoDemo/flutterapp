@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- 在使用期间访问位置 -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>App需要您的同意, APP才能在使用期间访问位置</string>
 </dict>
 </plist>
