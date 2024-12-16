@@ -48,6 +48,11 @@
 
 	<!-- 在使用期间访问位置 -->
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>App需要您的同意, APP才能在使用期间访问位置</string>
+    <string>App需要获取您的位置以提供服务。</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>App需要持续获取您的位置以提供服务。</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>App需要持续获取您的位置以提供服务。</string>
+
 </dict>
 </plist>

@@ -5,11 +5,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_z_location/flutter_z_location.dart';
 import 'package:get/get.dart';
 
 import '../utils/ToastUtils.dart';
 import '../widget/CustomAppBar.dart';
+// import 'package:flutter_amap_base/amap_base.dart';
+import 'package:flutter_amap_base/amap_base.dart';
 
 class OtherTypePage extends StatefulWidget {
   const OtherTypePage({Key? key}) : super(key: key);
@@ -21,6 +22,13 @@ class OtherTypePage extends StatefulWidget {
 class _OtherTypePageState extends State<OtherTypePage> {
   List<String> _listData = ['定位', '导航', '蓝牙','扫码','NFC','其他'];
   String _textInfo= '数据信息';
+
+  @override
+  void initState() {
+    super.initState();
+    _requestPermission();
+  }
+
   @override
   Widget build(BuildContext context) {
     final String message = Get.arguments['title'];
@@ -67,6 +75,9 @@ class _OtherTypePageState extends State<OtherTypePage> {
   void selectType(String type){
     switch(type){
       case '定位':
+        setState(() {
+          _textInfo = '定位信息';
+        });
         getLocateInfo();
         break;
       case '导航':
@@ -98,21 +109,26 @@ class _OtherTypePageState extends State<OtherTypePage> {
   }
 
   Future<void> getLocateInfo() async {
-  //   // 获取GPS定位经纬度
-  //   final coordinate = await FlutterZLocation.getCoordinate();
-  //   // 经纬度反向地理编码获取地址信息(省、市、区)
-  //   final res1 = await FlutterZLocation.geocodeCoordinate(coordinate.latitude, coordinate.longitude, pathHead: 'assets/');
-  //
-  //   // 获取ip地址
-  //   final ipStr = await FlutterZLocation.getIp();
-  //   // 经纬度反向地理编码获取地址信息(省、市、区)
-  //   final res2 = await FlutterZLocation.geocodeIp(ipStr, pathHead: 'assets/');
-  //
-  //   setState(() {
-  //     _textInfo = '经纬度：${coordinate.latitude},${coordinate.longitude}\n'
-  //         '地址：${res1.province},${res1.city},${res1.district}\n'
-  //         'IP：$ipStr\n'
-  //         '地址：${res2.province},${res2.city},${res2.district}';
-  //   });
+    AMapLocation aMapLocation=AMapLocation();
+    aMapLocation.init();
+    await aMapLocation.getLocation(LocationClientOptions()).then((value) {
+      print('定位信息：${value.toJson()}');
+    });
+    aMapLocation.startLocate(LocationClientOptions()).listen((event) {
+      print('定位信息：${event.toJson()}');
+    });
+
+
   }
+
+  void _requestPermission() async {
+    // final status = await Permission.location.request();
+    // if (status.isGranted) {
+    //   print('定位权限已授权');
+    // } else {
+    //   print('定位权限未授权');
+    // }
+  }
+
+
 }

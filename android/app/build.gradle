@@ -6,17 +6,18 @@ plugins {
 }
 
 android {
+
     namespace = "com.example.flutterapp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     defaultConfig {
@@ -40,6 +41,8 @@ android {
 }
 dependencies {
 //    implementation 'io.flutter:flutter_embedding_release:2.0.0'
+    implementation 'com.amap.api:navi-3dmap:9.8.2_3dmap9.8.2'
+    implementation 'com.amap.api:search:9.7.0'
 }
 flutter {
     source = "../.."
