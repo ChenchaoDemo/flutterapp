@@ -1,4 +1,10 @@
 allprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile.class){
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' } // 可选：使用阿里云镜像提高国内访问速度
         maven { url 'https://maven.aliyun.com/repository/google' }
