@@ -54,5 +54,10 @@
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>App需要持续获取您的位置以提供服务。</string>
 
+    <!--蓝牙  -->
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>We need Bluetooth permission to connect to Bluetooth devices.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need location permission to scan for Bluetooth devices.</string>
 </dict>
 </plist>

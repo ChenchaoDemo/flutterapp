@@ -3,8 +3,12 @@
 // 创建日期: 2024-11-22
 // 描述: 
 
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 
 import '../utils/ToastUtils.dart';
@@ -22,7 +26,10 @@ class OtherTypePage extends StatefulWidget {
 class _OtherTypePageState extends State<OtherTypePage> {
   List<String> _listData = ['定位', '导航', '蓝牙','扫码','NFC','其他'];
   String _textInfo= '数据信息';
+  String _textInfo2= '数据信息2';
 
+  late StreamSubscription<List<ScanResult>> _scanRetsSubscription;
+  late StreamSubscription<bool> _isScanningSubscription;
   @override
   void initState() {
     super.initState();
@@ -57,15 +64,28 @@ class _OtherTypePageState extends State<OtherTypePage> {
               );
             },
           ),
+
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Container(
-              height: 80,
+              height: 50,
               padding: EdgeInsets.only(left: 20, right: 20,top: 10, bottom: 10),
               color: Colors.white,
               child: Text(_textInfo, textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
+            ),
+          ),
+          SizedBox(height: 20),
+          Positioned(
+            bottom: 50,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 60,
+              padding: EdgeInsets.only(left: 20, right: 20,top: 10, bottom: 10),
+              color: Colors.white,
+              child: Text(_textInfo2, textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
             ),
           ),
         ],
@@ -89,6 +109,7 @@ class _OtherTypePageState extends State<OtherTypePage> {
         setState(() {
           _textInfo = '蓝牙信息';
         });
+        getBlueInfo();
         break;
       case '扫码':
         setState(() {
@@ -121,10 +142,35 @@ class _OtherTypePageState extends State<OtherTypePage> {
 
   }
 
+  void  getBlueInfo() {
+    FlutterBluePlus.startScan(timeout: Duration(seconds: 40));
+    _scanRetsSubscription = FlutterBluePlus.scanResults.listen((rets) {
+      // _scanRets = rets;
+      rets.forEach((element) {
+        print("设备名称: ${element.device.name}"+ "设备ID: ${element.device.id}"+ "设备信号强度: ${element.rssi}");
+      });
+      if(mounted){
+        setState(() {
+          _textInfo2 = rets.length.toString();
+        });
+      }
+    }, onError: (err){
+      print("scan error: $err");
+    });
+    _isScanningSubscription = FlutterBluePlus.isScanning.listen((event) {
+      if(mounted){
+        setState(() {
+          _textInfo = '搜索状态: $event';
+        });
+      }
+    });
+
+  }
+
   void _requestPermission() async {
     // final status = await Permission.location.request();
     // if (status.isGranted) {
-    //   print('定位权限已授权');
+    //   print('定位权限已授权');gs
     // } else {
     //   print('定位权限未授权');
     // }
