@@ -45,6 +45,7 @@ dependencies:
 #  定位功能
   flutter_amap_base: ^1.0.7
 
+  flutter_blue_plus: ^1.4.0
 
 
 
