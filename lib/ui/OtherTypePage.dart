@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
 import '../utils/ToastUtils.dart';
 import '../widget/CustomAppBar.dart';
@@ -119,7 +120,10 @@ class _OtherTypePageState extends State<OtherTypePage> {
       case 'NFC':
         setState(() {
           _textInfo = 'NFC信息';
+
         });
+
+        getNfcInfo();
         break;
       case '其他':
         setState(() {
@@ -164,9 +168,46 @@ class _OtherTypePageState extends State<OtherTypePage> {
         });
       }
     });
-
   }
 
+  Future<void>  getNfcInfo() async{
+    try {
+      // 开始 NFC 会话
+      await NfcManager.instance.startSession(
+        onDiscovered: (NfcTag tag) async {
+          // 扫描到 NFC 标签后，更新 UI 显示标签数据
+          setState(() {
+            // 如果想查看详细的标签信息，可以打印 tag
+            _textInfo = 'NFC 标签数据: ${tag.data}';
+          });
+
+          // 结束 NFC 会话
+          await NfcManager.instance.stopSession();
+        },
+      );
+    } catch (e) {
+      setState(() {
+        _textInfo = 'NFC 扫描失败: $e';
+      });
+    }
+
+    // String _nfcTag = '无法读取标签';
+    // try {
+    //   NfcData result = await NfcInFlutter.readNfc();
+    //   setState(() {
+    //     _nfcTag = result.id ?? '无法读取标签';
+    //   });
+    // } catch (e) {
+    //   setState(() {
+    //     _nfcTag = 'NFC扫描失败: $e';
+    //   });
+    // }
+    // if (Platform.isAndroid) {
+    //   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) {
+    //     print('Discovered tag: $tag');
+    //   });
+    // }
+  }
   void _requestPermission() async {
     // final status = await Permission.location.request();
     // if (status.isGranted) {
@@ -176,5 +217,10 @@ class _OtherTypePageState extends State<OtherTypePage> {
     // }
   }
 
-
+  @override
+  void dispose() {
+    super.dispose();
+    // 停止 NFC 会话
+    NfcManager.instance.stopSession();
+  }
 }

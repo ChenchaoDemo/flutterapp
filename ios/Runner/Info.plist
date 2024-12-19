@@ -59,5 +59,9 @@
     <string>We need Bluetooth permission to connect to Bluetooth devices.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>We need location permission to scan for Bluetooth devices.</string>
+
+    <key>NSNFCUsageDescription</key>
+    <string>We need NFC permission to read NFC tags.</string>
+
 </dict>
 </plist>
