@@ -44,10 +44,10 @@ dependencies:
 
 #  定位功能
   flutter_amap_base: ^1.0.7
-
+#  蓝牙
   flutter_blue_plus: ^1.4.0
-
-#  nfc_manager: ^3.5.0
+  #nfc  
+  nfc_manager: ^3.5.0
 
 
 dev_dependencies:
