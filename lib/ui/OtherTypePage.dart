@@ -8,14 +8,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
-// import 'package:nfc_manager/nfc_manager.dart';
-
 import '../utils/ToastUtils.dart';
 import '../widget/CustomAppBar.dart';
-// import 'package:flutter_amap_base/amap_base.dart';
-import 'package:flutter_amap_base/amap_base.dart';
 
 class OtherTypePage extends StatefulWidget {
   const OtherTypePage({Key? key}) : super(key: key);
@@ -28,9 +23,6 @@ class _OtherTypePageState extends State<OtherTypePage> {
   List<String> _listData = ['定位', '导航', '蓝牙','扫码','NFC','其他'];
   String _textInfo= '数据信息';
   String _textInfo2= '数据信息2';
-
-  late StreamSubscription<List<ScanResult>> _scanRetsSubscription;
-  late StreamSubscription<bool> _isScanningSubscription;
   @override
   void initState() {
     super.initState();
@@ -99,7 +91,6 @@ class _OtherTypePageState extends State<OtherTypePage> {
         setState(() {
           _textInfo = '定位信息';
         });
-        getLocateInfo();
         break;
       case '导航':
         setState(() {
@@ -110,7 +101,6 @@ class _OtherTypePageState extends State<OtherTypePage> {
         setState(() {
           _textInfo = '蓝牙信息';
         });
-        getBlueInfo();
         break;
       case '扫码':
         setState(() {
@@ -122,8 +112,6 @@ class _OtherTypePageState extends State<OtherTypePage> {
           _textInfo = 'NFC信息';
 
         });
-
-        getNfcInfo();
         break;
       case '其他':
         setState(() {
@@ -133,81 +121,6 @@ class _OtherTypePageState extends State<OtherTypePage> {
     }
   }
 
-  Future<void> getLocateInfo() async {
-    AMapLocation aMapLocation=AMapLocation();
-    aMapLocation.init();
-    await aMapLocation.getLocation(LocationClientOptions()).then((value) {
-      print('定位信息：${value.toJson()}');
-    });
-    aMapLocation.startLocate(LocationClientOptions()).listen((event) {
-      print('定位信息：${event.toJson()}');
-    });
-
-
-  }
-
-  void  getBlueInfo() {
-    FlutterBluePlus.startScan(timeout: Duration(seconds: 40));
-    _scanRetsSubscription = FlutterBluePlus.scanResults.listen((rets) {
-      // _scanRets = rets;
-      rets.forEach((element) {
-        print("设备名称: ${element.device.name}"+ "设备ID: ${element.device.id}"+ "设备信号强度: ${element.rssi}");
-      });
-      if(mounted){
-        setState(() {
-          _textInfo2 = rets.length.toString();
-        });
-      }
-    }, onError: (err){
-      print("scan error: $err");
-    });
-    _isScanningSubscription = FlutterBluePlus.isScanning.listen((event) {
-      if(mounted){
-        setState(() {
-          _textInfo = '搜索状态: $event';
-        });
-      }
-    });
-  }
-
-  Future<void>  getNfcInfo() async{
-    try {
-      // 开始 NFC 会话
-      // await NfcManager.instance.startSession(
-      //   onDiscovered: (NfcTag tag) async {
-      //     // 扫描到 NFC 标签后，更新 UI 显示标签数据
-      //     setState(() {
-      //       // 如果想查看详细的标签信息，可以打印 tag
-      //       _textInfo = 'NFC 标签数据: ${tag.data}';
-      //     });
-      //
-      //     // 结束 NFC 会话
-      //     await NfcManager.instance.stopSession();
-      //   },
-      // );
-    } catch (e) {
-      setState(() {
-        _textInfo = 'NFC 扫描失败: $e';
-      });
-    }
-
-    // String _nfcTag = '无法读取标签';
-    // try {
-    //   NfcData result = await NfcInFlutter.readNfc();
-    //   setState(() {
-    //     _nfcTag = result.id ?? '无法读取标签';
-    //   });
-    // } catch (e) {
-    //   setState(() {
-    //     _nfcTag = 'NFC扫描失败: $e';
-    //   });
-    // }
-    // if (Platform.isAndroid) {
-    //   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) {
-    //     print('Discovered tag: $tag');
-    //   });
-    // }
-  }
   void _requestPermission() async {
     // final status = await Permission.location.request();
     // if (status.isGranted) {
@@ -220,7 +133,5 @@ class _OtherTypePageState extends State<OtherTypePage> {
   @override
   void dispose() {
     super.dispose();
-    // 停止 NFC 会话
-    // NfcManager.instance.stopSession();
   }
 }
