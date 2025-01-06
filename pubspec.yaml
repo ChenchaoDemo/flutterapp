@@ -42,11 +42,6 @@ dependencies:
   #  状态管理
   provider: ^6.0.1
 
-#  定位功能
-  flutter_amap_base: ^1.0.7
-
-
-
 
 dev_dependencies:
   flutter_test:

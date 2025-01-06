@@ -9,8 +9,6 @@ import 'package:get/get.dart';
 
 import '../utils/ToastUtils.dart';
 import '../widget/CustomAppBar.dart';
-// import 'package:flutter_amap_base/amap_base.dart';
-import 'package:flutter_amap_base/amap_base.dart';
 
 class OtherTypePage extends StatefulWidget {
   const OtherTypePage({Key? key}) : super(key: key);
@@ -78,7 +76,6 @@ class _OtherTypePageState extends State<OtherTypePage> {
         setState(() {
           _textInfo = '定位信息';
         });
-        getLocateInfo();
         break;
       case '导航':
         setState(() {
@@ -106,19 +103,6 @@ class _OtherTypePageState extends State<OtherTypePage> {
         });
         break;
     }
-  }
-
-  Future<void> getLocateInfo() async {
-    AMapLocation aMapLocation=AMapLocation();
-    aMapLocation.init();
-    await aMapLocation.getLocation(LocationClientOptions()).then((value) {
-      print('定位信息：${value.toJson()}');
-    });
-    aMapLocation.startLocate(LocationClientOptions()).listen((event) {
-      print('定位信息：${event.toJson()}');
-    });
-
-
   }
 
   void _requestPermission() async {
